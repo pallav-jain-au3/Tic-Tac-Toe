@@ -10,7 +10,7 @@ var winningCombinations = [
   ["0", "4", "8"],
   ["6", "4", "2"]
 ];
-var totalMovesPlayed;
+
 
 function whoseTurn(turn) {
   if (turn == true) {
@@ -30,7 +30,6 @@ function gettingMove(player) {
     for move available from isMoveAvailable(move);
     if isMoveAvailable returns true {
       we will push move in player1Moves;
-      increment totalMovesPlayed;
       return move
     } else {
       gettingMove(player1);
@@ -39,7 +38,6 @@ function gettingMove(player) {
     move = getBestMove();
     if (isMoveAvailable(move)) {
       push move in players2 move
-      increment totalMovesPlayed
       return move;
     } else {
       gettingMove(player2)
