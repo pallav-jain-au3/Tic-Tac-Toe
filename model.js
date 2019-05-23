@@ -10,12 +10,17 @@ var winningCombinations = [
   ["0", "4", "8"],
   ["6", "4", "2"]
 ];
+var turn = true;
+let player1Score = 0;
+let player2Score = 0;
 
 
-function whoseTurn(turn) {
+function whoseTurn() {
   if (turn == true) {
+    turn = !turn;
     return player1;
   } else {
+    turn = !turn;
     return player2;
   }
 }
@@ -57,11 +62,17 @@ function isMoveAvailable(move) {
 function getBestMove() {
 
 }
+function  getPlayersScore(player){
 
-function addPlayersMoveInHtml(move) {
-  change the innerHTML of square corresponding to move;
-  add played class to square corresponding to that move;
+    if player = player1{
+      player1Score += 1;
+    }
+    else{
+      player2Score += 1;
+    }
+    return player1Score, player2Score;
 }
+
 
 function checkifThereIsWinner(player) {
   compare the array of current player with winningCombinations
@@ -69,10 +80,6 @@ function checkifThereIsWinner(player) {
     return true;
   }
 }
+function resetModel(){
 
-function displayResult(player, result) {
-  if result is winner {
-    display it in html with player
-  } else
-    display result draw in html
 }
