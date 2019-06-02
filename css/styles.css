@@ -1,66 +1,62 @@
 .board-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #557669;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  border: 50px solid #5a3921;
-  color: #e7e6e1;
+    width: 100vw;
+    background-color: #557669;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: 50px solid #5a3921;
+    color: #e7e6e1;
+    flex-direction: column;
 }
 
 .board {
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  font-size: 8rem;
+    width: 600px;
+    display: flex;
+
+    flex-wrap: wrap;
+    font-size: 8rem;
+    height: 80%;
+    align-self: center;
 }
 
 .square {
-  width: 200px;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #e7e6e1;
+    margin: 0;
+}
+
+.player1 {
+    background-color: #f1e4e4;
+    color: black;
+}
+
+.player2 {
+    background-color: red;
+
+}
+
+.result {
+    text-align: center;
+    height: 20%;
+}
+
+.cross::before {
+ content: "X";
+}
+
+.zero::before {
+    content: "0";
+}
+.gameResult{
+  color: white;
+  position: absolute;
+  top:40%;
+  left : 40%;
+text-align: center;
   height: 200px;
-  border: 2px solid #e7e6e1;
-  margin: 0;
+  background: #7fa99b;
 }
-
-.square:nth-child(1), .square:nth-child(2), .square:nth-child(3) {
-  border-left: none;
-}
-
-.square:nth-child(7), .square:nth-child(8), .square:nth-child(9) {
-  border-right: none;
-}
-
-.square:nth-child(1), .square:nth-child(4), .square:nth-child(7) {
-  border-top: none;
-}
-
-.square:nth-child(3), .square:nth-child(6), .square:nth-child(9) {
-  border-bottom: none;
-}
-
-.cross {
-  background-color: #f1e4e4;
-  color: black;
-}
-
-.zero{
-background-color: red;
-}
-.results {
-  background-color: #212121;
-  width: 400px;
-  position: absolute;
-  top: 45%;
-  left: 52%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  opacity: 0.9;
-  font-size: 5rem;
-  display: none;
-}
-
-button{
-  position: absolute;
+.winning-moves{
+  background: blue;
 }
