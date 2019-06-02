@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  font-size : 8rem;
+  font-size: 8rem;
 }
 
 .square {
@@ -39,15 +39,28 @@
 .square:nth-child(3), .square:nth-child(6), .square:nth-child(9) {
   border-bottom: none;
 }
-.player1{
+
+.cross {
   background-color: #f1e4e4;
   color: black;
 }
-.player2{
+
+.zero{
 background-color: red;
+}
+.results {
+  background-color: #212121;
+  width: 400px;
+  position: absolute;
+  top: 45%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  opacity: 0.9;
+  font-size: 5rem;
+  display: none;
+}
 
-  }
-  .result{
-    text-align: center;
-
-  }
+button{
+  position: absolute;
+}

@@ -1,54 +1,45 @@
-player - 1 is X and player - 2 is 0;
-var totalMovesPlayed = 0;
-var playerWins = false;
-let player1Score = 0, player2Score = 0;
-displayScore(player1Score, player2Score);
-
-do {
-  player = getting player whose turn is from whoseTurn();
-  displaywhoseTurn(player);
-  getting move played by player1 or player2 from getMove(player);
-  move = getMove(player);
-  applying move played by player in inner html by addPlayersMoveInHtml(move);
-  totalMovesPlayed++;
-  if (totalMovesPlayed <= 5) {
-    if checkifThereIsWinner(player) is true {
-      displayResult(player);
-     (player1Score, player2Score) =  getPlayersScore(player);
-     displayScore(player1Score, player2Score);
-      playerWins = true;
-      exit the loop
-    }
-  }
+const squares = document.querySelectorAll('.square');
+function initialize(){
+  initializeModel();
+  initializeView();
+  startGame();
 }
-while (totalMovesPlayed is not equal to nine and playerwin is false)
-if (playerWins == false) {
-  displayResult(player, draw);
+function initializeModel(){
+  turn = true;
 }
-resetGame();
-function displaywhoseTurn(player){
-  display whose turn is in view
+function initializeView(){
+  squares.forEach(square => square.classList.add('notClicked'));
+  squares.forEach(square => square.innerHTML = "");
 }
-
-function displayResult(player, result) {
-  if result is winner {
-    display it in html with player
-  } else
-    display result draw in html
+function startGame(){
+  player = whoseTurn();
+  displayTurn(player);
+  let cells = document.querySelectorAll('.notClicked');
+  cells.forEach(cell => cell.addEventListener('click', cellTapped));
 }
 
 
-function addPlayersMoveInHtml(move) {
-  change the innerHTML of square corresponding to move;
-  add played class to square corresponding to that move;
-}
-displayScore(player1Score, player2Score){
+function cellTapped(e){
+gridNumber = e.target.id;
+ console.log(gridNumber);
+displaySymbolInCell(gridNumber);
+removeListener(gridNumber);
 
 }
-function resetGame(){
-  resetModel();
-  resetView();
+function removeListener(gridNumber){
+  let square = document.getElementById(gridNumber);
+  console.log(square);
+  square.removeEventListener('click', function (){
+    console.log("removed");
+  })
 }
-function resetView(){
+function displaySymbolInCell(gridNumber){
+  document.getElementById(gridNumber).innerHTML = "x";
+}
+function whoseTurn(){}
 
+function displayTurn(player){
+  document.querySelector('.whose-turn h1').innerHTML = player;
 }
+
+initialize();
