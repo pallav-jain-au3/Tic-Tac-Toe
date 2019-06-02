@@ -13,20 +13,35 @@ const winningCombinations = [
 let player1Score = 0;
 let player2Score = 0;
 let moves = [];
+const players = {
+  player1: 1,
+  player2: 2
+}
+
+const GameStatus = {
+  draw: 0,
+  player1: 1,
+  player2: 2,
+  notEnded: -1
+};
 
 let winningArray;
+
 function initializeGameModel() {
   moves = [];
   player1Moves = [];
   player2Moves = [];
   winningArray = [];
 }
-function getScoreForPlayerP1(){
+
+function getScoreForPlayerP1() {
   return player1Score;
 }
-function getScoreForPlayerP2(){
+
+function getScoreForPlayerP2() {
   return player2Score;
 }
+
 function initializeSeries() {
   initializeGameModel()
 }
@@ -46,28 +61,14 @@ function aMoveMade(player, gridNumber) {
 
 }
 
-
-
-const players = {
-  player1: 1,
-  player2: 2
-}
-
-const GameStatus = {
-  draw: 0,
-  player1: 1,
-  player2: 2,
-  notEnded: -1
-};
-
 function getGameResultStatus(player) {
   if (moves.length > 4) {
-      const hasAnybodyWon = player == players.player1 ? areWinningMoves(player1Moves): areWinningMoves(player2Moves);
-      if(hasAnybodyWon) {
-        return player == players.player1 ?GameStatus.player1 : players.player2;
-      } else if(moves.length == 9) {
-        return GameStatus.draw;
-      }
+    const hasAnybodyWon = player == players.player1 ? areWinningMoves(player1Moves) : areWinningMoves(player2Moves);
+    if (hasAnybodyWon) {
+      return player == players.player1 ? GameStatus.player1 : players.player2;
+    } else if (moves.length == 9) {
+      return GameStatus.draw;
+    }
   }
   return GameStatus.notEnded;
 }
@@ -75,37 +76,43 @@ function getGameResultStatus(player) {
 // input moves = ["1", "2", "3"]
 // output bool
 function areWinningMoves(moves) {
-    const isWinningMoveInUserMoves = winingMove => moves.includes(winingMove)
-    const isMoveInCurrentWinningCombination = winningCombination => winningCombination.every(isWinningMoveInUserMoves)
-    const winningMoves = winningCombinations.find(isMoveInCurrentWinningCombination);
+  const isWinningMoveInUserMoves = winingMove => moves.includes(winingMove)
+  const isMoveInCurrentWinningCombination = winningCombination => winningCombination.every(isWinningMoveInUserMoves)
+  const winningMoves = winningCombinations.find(isMoveInCurrentWinningCombination);
 
-     if(!!winningMoves){
-       winningArray = winningMoves;
-     }
-     return !!winningMoves;
+  if (!!winningMoves) {
+    winningArray = winningMoves;
+  }
+  return !!winningMoves;
 }
-
 
 function getGameResultString(gameResult) {
   let gameResultString;
-  switch(gameResult) {
-    case GameStatus.player1: gameResultString = "Player 1 Won!!!";
-    break;
-    case GameStatus.player2: gameResultString = "Player 2 Won!!!";
-    break;
-    case GameStatus.draw: gameResultString = "Game Draw";
-    break;
+  switch (gameResult) {
+    case GameStatus.player1:
+      gameResultString = "Player 1 Won!!!";
+      break;
+    case GameStatus.player2:
+      gameResultString = "Player 2 Won!!!";
+      break;
+    case GameStatus.draw:
+      gameResultString = "Game Draw";
+      break;
   }
   return gameResultString;
 }
-function updatePlayerScore(gameStatus){
-  switch (gameStatus){
-    case GameStatus.player1 :player1Score += 1;
-    break;
-    case GameStatus.player2 :player2Score += 1;
-    break;
-    }
+
+function updatePlayerScore(gameStatus) {
+  switch (gameStatus) {
+    case GameStatus.player1:
+      player1Score += 1;
+      break;
+    case GameStatus.player2:
+      player2Score += 1;
+      break;
+  }
 }
-function getWinningArray(){
+
+function getWinningArray() {
   return winningArray;
 }

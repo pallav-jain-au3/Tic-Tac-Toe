@@ -28,13 +28,14 @@ function endGame(gameStatus) {
   makeScreenUnTappable();
   updatePlayerScore(gameStatus);
   displayScores(getScoreForPlayerP1(), getScoreForPlayerP2());
+}
+
+function displayWinningMoves(winningArray) {
+  for (let gridNumber of winningArray) {
+    console.log(gridNumber);
+    $('#' + gridNumber).addClass('winning-moves');
   }
-  function displayWinningMoves(winningArray){
-    for(let gridNumber of winningArray){
-      console.log(gridNumber);
-      $('#' + gridNumber).addClass('winning-moves');
-    }
-  }
+}
 
 function makeScreenUnTappable() {
   $(".square").off('click', cellTapped);
@@ -46,10 +47,12 @@ function askUserForNextGame() {
 
   }
 }
-function resetGame(){
+
+function resetGame() {
   initializeView();
   initializeGame();
 }
+
 function addClickListenersToCells() {
   $(".square").on('click', cellTapped);
 }
@@ -62,15 +65,20 @@ function displayScores(player1Score, player2Score) {
 function displayGameResult(gameResult) {
   console.log(getGameResultString(gameResult))
   $('.gameResult h1').text(getGameResultString(gameResult));
+  $('.gameResult').css("display", "block");
 
 }
-function initializeView(){
+
+function initializeView() {
   clearBoard();
   resetResults();
 }
-function clearBoard(){
+
+function clearBoard() {
   $('.square').removeClass('zero cross winning-moves');
 }
-function resetResults(){
+
+function resetResults() {
   $('.gameResult h1').text("");
+  $(".gameResult").css("display", "none");
 }

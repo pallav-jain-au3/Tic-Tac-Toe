@@ -1,62 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Gloria+Hallelujah&display=swap');
+
+body {
+  font-family: 'East Sea Dokdo', cursive;
+}
+
 .board-container {
-    width: 100vw;
-    background-color: #557669;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    border: 50px solid #5a3921;
-    color: #e7e6e1;
-    flex-direction: column;
+  width: 100vw;
+  background-image: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 50px solid #5a3921;
+  color: #e7e6e1;
+  flex-direction: column;
+  padding-bottom: 2rem;
 }
 
 .board {
-    width: 600px;
-    display: flex;
-
-    flex-wrap: wrap;
-    font-size: 8rem;
-    height: 80%;
-    align-self: center;
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 8rem;
+  height: 80%;
+  align-self: center;
 }
 
 .square {
-    width: 200px;
-    height: 200px;
-    border: 2px solid #e7e6e1;
-    margin: 0;
+  width: 200px;
+  height: 200px;
+  border: 10px solid rgba(255, 255, 255, .8);
+  margin: 0;
+}
+
+.square:before {
+  content: '';
 }
 
 .player1 {
-    background-color: #f1e4e4;
-    color: black;
+  background-color: #f1e4e4;
+  color: black;
 }
 
 .player2 {
-    background-color: red;
-
+  background-color: red;
 }
 
 .result {
-    text-align: center;
-    height: 20%;
+  text-align: center;
+  height: 20%;
 }
 
 .cross::before {
- content: "X";
+  content: "X";
 }
 
 .zero::before {
-    content: "0";
+  content: "0";
 }
-.gameResult{
+
+.gameResult {
   color: white;
   position: absolute;
-  top:40%;
-  left : 40%;
-text-align: center;
+  top: 40%;
+  left: 40%;
+  text-align: center;
   height: 200px;
-  background: #7fa99b;
+  background-image: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
+  display: none;
+  padding: 2rem;
 }
-.winning-moves{
-  background: blue;
+
+.gameResult h1 {
+  padding: 2rem;
+}
+
+.winning-moves {
+  background: rgba(255, 255, 255, .8);
+  color: #fffeec;
+}
+
+.first-col .square:nth-child(1), .first-col .square:nth-child(2), .first-col .square:nth-child(3) {
+  border-left: none;
+  border-right: none;
+}
+
+.second-col .square:nth-child(1), .second-col .square:nth-child(2), .second-col .square:nth-child(3) {
+  border-right: none;
+}
+
+.third-col .square:nth-child(1), .third-col .square:nth-child(2), .third-col .square:nth-child(3) {
+  border-right: none;
+}
+
+.first-col .square:nth-child(1), .second-col .square:nth-child(1), .third-col .square:nth-child(1) {
+  border-bottom: none;
+  border-top: none;
+}
+
+.first-col .square:nth-child(2), .second-col .square:nth-child(2), .third-col .square:nth-child(2) {
+  border-bottom: none;
+}
+
+.first-col .square:nth-child(3), .second-col .square:nth-child(3), .third-col .square:nth-child(3) {
+  border-bottom: none;
+}
+
+.replay {
+  font-size: 4rem;
+  border: none;
+  color: white;
 }
