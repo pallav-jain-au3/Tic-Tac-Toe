@@ -1,6 +1,6 @@
-var player1Moves = [];
-var player2Moves = [];
-var winningCombinations = [
+let player1Moves;
+let player2Moves;
+const winningCombinations = [
   ["0", "3", "6"],
   ["1", "4", "7"],
   ["2", "5", "8"],
@@ -10,69 +10,109 @@ var winningCombinations = [
   ["0", "4", "8"],
   ["6", "4", "2"]
 ];
+let player1Score = 0;
+let player2Score = 0;
+let moves = [];
+const players = {
+  player1: 1,
+  player2: 2
+}
 
+const GameStatus = {
+  draw: 0,
+  player1: 1,
+  player2: 2,
+  notEnded: -1
+};
 
-function whoseTurn(turn) {
-  if (turn == true) {
-    return player1;
+let winningArray;
+
+function initializeGameModel() {
+  moves = [];
+  player1Moves = [];
+  player2Moves = [];
+  winningArray = [];
+}
+
+function getScoreForPlayerP1() {
+  return player1Score;
+}
+
+function getScoreForPlayerP2() {
+  return player2Score;
+}
+
+function initializeSeries() {
+  initializeGameModel()
+}
+
+function whoseTurnNext() {
+  return moves.length % 2 == 0 ? players.player1 : players.player2;
+}
+
+function aMoveMade(player, gridNumber) {
+  moves.push(gridNumber);
+  if (player == 1) {
+    player1Moves.push(gridNumber);
+
   } else {
-    return player2;
+    player2Moves.push(gridNumber);
   }
+
 }
 
-function gettingMove(player) {
-  if (player == player1) {
-    we will listen
-    for click by adding eventlistner
-    after clicking we will get move
-    move = e.value;
-    check
-    for move available from isMoveAvailable(move);
-    if isMoveAvailable returns true {
-      we will push move in player1Moves;
-      return move
-    } else {
-      gettingMove(player1);
-    }
-  } else {
-    move = getBestMove();
-    if (isMoveAvailable(move)) {
-      push move in players2 move
-      return move;
-    } else {
-      gettingMove(player2)
+function getGameResultStatus(player) {
+  if (moves.length > 4) {
+    const hasAnybodyWon = player == players.player1 ? areWinningMoves(player1Moves) : areWinningMoves(player2Moves);
+    if (hasAnybodyWon) {
+      return player == players.player1 ? GameStatus.player1 : players.player2;
+    } else if (moves.length == 9) {
+      return GameStatus.draw;
     }
   }
+  return GameStatus.notEnded;
 }
 
-function isMoveAvailable(move) {
-  it check
-  for move available by checking classes of div element and
-  if does not have class played then only it will
-  return true
-  else it will
-  return false
+// input moves = ["1", "2", "3"]
+// output bool
+function areWinningMoves(moves) {
+  const isWinningMoveInUserMoves = winingMove => moves.includes(winingMove)
+  const isMoveInCurrentWinningCombination = winningCombination => winningCombination.every(isWinningMoveInUserMoves)
+  const winningMoves = winningCombinations.find(isMoveInCurrentWinningCombination);
+
+  if (!!winningMoves) {
+    winningArray = winningMoves;
+  }
+  return !!winningMoves;
 }
 
-function getBestMove() {
-
+function getGameResultString(gameResult) {
+  let gameResultString;
+  switch (gameResult) {
+    case GameStatus.player1:
+      gameResultString = "Player 1 Won!!!";
+      break;
+    case GameStatus.player2:
+      gameResultString = "Player 2 Won!!!";
+      break;
+    case GameStatus.draw:
+      gameResultString = "Game Draw";
+      break;
+  }
+  return gameResultString;
 }
 
-function addPlayersMoveInHtml(move) {
-  change the innerHTML of square corresponding to move;
-  add played class to square corresponding to that move;
-}
-
-function checkifThereIsWinner(player) {
-  compare the array of current player with winningCombinations
-  if (there is winner) {
-    return true;
+function updatePlayerScore(gameStatus) {
+  switch (gameStatus) {
+    case GameStatus.player1:
+      player1Score += 1;
+      break;
+    case GameStatus.player2:
+      player2Score += 1;
+      break;
   }
 }
 
-function displayResult(player, result) {
-  if result is winner {
-    display it in html with player
-  } else
-    display result draw in html
+function getWinningArray() {
+  return winningArray;
 }

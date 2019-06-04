@@ -1,23 +1,72 @@
-player - 1 is X and player - 2 is 0;
-var totalMovesPlayed = 0;
-var playerWins = false;
-var turn = true;
-do {
-  player = getting player whose turn is from whoseTurn(turn);
-  turn = !turn;
-  getting move played by player1 or player2 from getMove(player);
-  move = getMove(player);
-  applying move played by player in inner html by addPlayersMoveInHtml(move);
-  totalMovesPlayed++;
-  if (totalMovesPlayed <= 5) {
-    if checkifThereIsWinner(player) is true {
-      displayResult(player, wins)
-      playerWins = true;
-      exit the loop
-    }
+function initializeGame() {
+  initializeSeries();
+  startGame();
+}
+initializeGame();
+
+function startGame() {
+  addClickListenersToCells();
+  displayScores(getScoreForPlayerP1(), getScoreForPlayerP2());
+}
+
+function cellTapped(event) {
+  const gridNumber = event.target.id;
+  const player = whoseTurnNext();
+  event.target.classList.add(player == players.player1 ? "zero" : "cross");
+  aMoveMade(player, gridNumber);
+  const gameStatus = getGameResultStatus(player);
+  if (gameStatus != GameStatus.notEnded) {
+    endGame(gameStatus);
+  } else {
+    $("#" + gridNumber).off('click', cellTapped);
   }
 }
-while (totalMovesPlayed is not equal to nine and playerwin is false)
-if (playerWins == false) {
-  displayResult(player, draw);
+
+function endGame(gameStatus) {
+  displayWinningMoves(getWinningArray());
+  displayGameResult(gameStatus);
+  makeScreenUnTappable();
+  updatePlayerScore(gameStatus);
+  displayScores(getScoreForPlayerP1(), getScoreForPlayerP2());
+}
+
+function displayWinningMoves(winningArray) {
+  winningArray.forEach(gridNumber => $('#' + gridNumber).addClass('winning-moves'));
+}
+
+function makeScreenUnTappable() {
+  $(".square").off('click', cellTapped);
+}
+
+function resetGame() {
+  initializeView();
+  initializeGame();
+}
+
+function addClickListenersToCells() {
+  $(".square").on('click', cellTapped);
+}
+
+function displayScores(player1Score, player2Score) {
+  $("#player1score").text(player1Score);
+  $("#player2score").text(player2Score);
+}
+
+function displayGameResult(gameResult) {
+  $('.gameResult h1').text(getGameResultString(gameResult));
+  $('.gameResult').css("display", "block");
+}
+
+function initializeView() {
+  clearBoard();
+  resetResults();
+}
+
+function clearBoard() {
+  $('.square').removeClass('zero cross winning-moves');
+}
+
+function resetResults() {
+  $('.gameResult h1').text("");
+  $(".gameResult").css("display", "none");
 }
