@@ -31,21 +31,11 @@ function endGame(gameStatus) {
 }
 
 function displayWinningMoves(winningArray) {
-  for (let gridNumber of winningArray) {
-    console.log(gridNumber);
-    $('#' + gridNumber).addClass('winning-moves');
-  }
+  winningArray.forEach(gridNumber => $('#' + gridNumber).addClass('winning-moves'));
 }
 
 function makeScreenUnTappable() {
   $(".square").off('click', cellTapped);
-}
-
-function askUserForNextGame() {
-  if (confirm("Do you want to play 1 more game?")) {
-    resetGame();
-
-  }
 }
 
 function resetGame() {
@@ -63,10 +53,8 @@ function displayScores(player1Score, player2Score) {
 }
 
 function displayGameResult(gameResult) {
-  console.log(getGameResultString(gameResult))
   $('.gameResult h1').text(getGameResultString(gameResult));
   $('.gameResult').css("display", "block");
-
 }
 
 function initializeView() {

@@ -6,7 +6,7 @@ body {
 
 .board-container {
   width: 100vw;
-  background-image: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
+  background: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -21,9 +21,9 @@ body {
   width: 600px;
   display: flex;
   flex-wrap: wrap;
-  font-size: 8rem;
   height: 80%;
   align-self: center;
+  font-size: 10rem;
 }
 
 .square {
@@ -66,13 +66,10 @@ body {
   left: 40%;
   text-align: center;
   height: 200px;
-  background-image: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
   display: none;
   padding: 2rem;
-}
-
-.gameResult h1 {
-  padding: 2rem;
+  font-size: 3rem;
+  background: url("https://res.cloudinary.com/danielmeilleurimg/tictactoe/chalkboard-250");
 }
 
 .winning-moves {
@@ -107,7 +104,7 @@ body {
 }
 
 .replay {
-  font-size: 4rem;
   border: none;
   color: white;
+  font-size: 3rem;
 }
